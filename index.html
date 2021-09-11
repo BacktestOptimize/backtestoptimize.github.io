@@ -3,7 +3,619 @@
   </head>
   <body>
     <h3>Aşağıdaki Bağlantıyı, Yer İşaretleri Çubuğuna Sürükleyin..!</h3><br>
-    <a title = "Beni Sürükle" href = "javascript:function%20test()%7B%0A%09return%20%22%22%3B%0A%7D%0A%0Aasync%20function%20baslat(btn)%7B%0A%09%0A%09%0A%09if%20(btn.innerText%20%3D%3D%20%22Ba%C5%9Flat!%22)%7B%0A%09%09if(inp1.value%20!%3D%20periyot.value)%7B%0A%09%09%09alert(%221.%20Giri%C5%9F%20de%C4%9Feriyle%2C%201.%20De%C4%9Fer%20Min%20de%C4%9Feri%20ayn%C4%B1%20olmal%C4%B1d%C4%B1r!%22)%3B%0A%09%09%09return%3B%0A%09%09%7D%0A%09%09if(inp3.value%20%3C%3D%20smooth.value)%7B%0A%09%09%09alert(%222.%20Giri%C5%9F%20de%C4%9Feri%2C%202.%20De%C4%9Fer%20Max%20de%C4%9Ferinden%20k%C3%BC%C3%A7%C3%BCk%20olmal%C4%B1d%C4%B1r!%22)%3B%0A%09%09%09return%3B%0A%09%09%7D%0A%09%09durdur%20%3D%20true%3B%0A%09%09pmin%20%3D%20inp1.value%3B%0A%09%09pmax%20%3D%20inp2.value%3B%0A%09%09smax%20%3D%20inp3.value%3B%0A%09%09smin%20%3D%20smooth.value%3B%0A%0A%09%09kaydet(%22inp1%22%2C%20pmin)%3B%0A%09%09kaydet(%22inp2%22%2C%20pmax)%3B%0A%09%09kaydet(%22inp3%22%2C%20smax)%3B%0A%09%09kaydet(%22inp4%22%2C%20inp4.value)%3B%0A%09%09kaydet(%22inp5%22%2C%20inp5.value)%3B%0A%09%09if(inp6.checked)%7B%0A%09%09%09kaydet(%22inp6%22%2C%201)%3B%0A%09%09%7D%0A%09%09else%7B%0A%09%09%09kaydet(%22inp6%22%2C%200)%3B%0A%09%09%7D%0A%09%09%0A%0A%09%09btn.disabled%20%3D%20true%3B%0A%0A%09%09if(tcheck.checked)%7B%0A%09%09%09tcheck.click()%3B%0A%09%09%7D%0A%09%09bilgi.innerHTML%20%3D%20%22Stoploss-1%20i%C3%A7in%20deneniyor..%22%3B%0A%09%09girisler.slos1%5B0%5D%20%3D%20true%3B%0A%09%09await%20input_ayarla(stoploss%2C%20inp4.value)%3B%0A%09%09await%20init()%3B%0A%09%09%0A%09%7D%0A%09%0A%09return%20false%3B%0A%09%0A%7D%0Afunction%20kaydet(key%2C%20val)%7B%0A%09localStorage.setItem(key%2C%20val.toString())%3B%0A%7D%0A%0Afunction%20cek(key)%7B%0A%09val%20%3D%20localStorage.getItem(key)%3B%0A%09if(val)%7B%0A%09%09return%20parseInt(val)%3B%0A%09%7D%0A%09return%200%3B%0A%7D%0A%0Afunction%20whl(inp%2C%20x)%7B%0A%09evt.deltaY%20%3D%20x%3B%0A%09inp.dispatchEvent(evt)%3B%0A%7D%0A%0Aasync%20function%20eventFire(el%2C%20etype)%7B%0A%09setTimeout(function()%7Bel.focus(%7BpreventScroll%3Afalse%7D)%3B%0A%09%7D%2C1)%3B%0A%7D%0A%0Aasync%20function%20clk(el)%7B%0A%09if(el.checked)%20%7Breturn%3B%7D%0A%09setTimeout(function()%7B%0A%09%09el.click()%3B%0A%09%7D%2C%201000)%3B%0A%7D%0A%0A%0Aasync%20function%20sonuc_cek()%7B%0A%09try%7B%0A%09%09sonuc%20%3D%20parseFloat(document.getElementsByClassName(%22data-item%22)%5B0%5D.getElementsByTagName(%22span%22)%5B0%5D.innerText.split(%22%25%22)%5B0%5D)%3B%0A%09%09%0A%09%09if%20(isNaN(sonuc)%20%7C%7C%20typeof(sonuc)%20%3D%3D%20%22undefined%22)%7B%0A%09%09%09return%20parseFloat(0)%3B%0A%09%09%7D%0A%09%09return%20sonuc%3B%0A%09%7D%20catch(e)%7B%0A%09%09console.log(e)%3B%0A%09%09return%200%3B%0A%09%7D%0A%7D%0A%0Aasync%20function%20hatalar()%7B%0A%0A%09if(typeof(periyot)%20%3D%3D%20%22undefined%22)%7B%0A%09%09alert(%22Girdiler%20Penceresini%20A%C3%A7mad%C4%B1n%C4%B1z!%0APencereyi%20a%C3%A7%C4%B1n%20ve%20minimum%20periyot%2Fsmooth%20de%C4%9Ferlerini%20girin.%0AProgram%C4%B1%20sonra%20%C3%A7al%C4%B1%C5%9Ft%C4%B1r%C4%B1n.%20%22)%3B%09%0A%09%09durdur%20%3D%20false%3B%0A%09%09return%3B%0A%09%7D%0A%09res%20%3D%20await%20fetchText()%3B%0A%09%0A%09eval(res)%3B%0A%09baslangic()%3B%0A%0A%7D%0Afunction%20evt()%7B%0A%09var%20event%20%3D%20document.createEvent('MouseEvents')%3B%0A%0A%09event.initMouseEvent('wheel'%2C%20true%2C%20true)%3B%0A%09return%20event%3B%0A%7D%0A%0A%0A%0Afunction%20delay(ms)%20%7B%0A%20%20return%20new%20Promise(resolve%20%3D%3E%20setTimeout(resolve%2C%20ms))%0A%7D%0A%0Aasync%20function%20input_ayarla(inp%2C%20val)%7B%0A%09await%20eventFire(inp%2C%20%22focus%22)%3B%0A%09wheel%20%3D%20100%3B%0A%09if%20(parseFloat(inp.value)%20%3C%20val)%7B%0A%09%09wheel%20%3D%20-100%3B%09%0A%09%7D%0A%09while(parseFloat(inp.value)%20!%3D%20parseFloat(val))%7B%0A%09%09setTimeout(function()%7Bwhl(inp%2C%20wheel)%3B%7D%2C10)%3B%0A%09%09await%20delay(100)%3B%0A%09%7D%0A%7D%0A%0Aasync%20function%20hmm_ok()%7B%0A%0A%0A%09if%20(inp5.value%20!%3D%200%20%26%26%20girisler.slos2%5B0%5D%20%3D%3D%20false)%7B%0A%09%09bilgi.innerHTML%20%3D%20%22Stoploss-2%20i%C3%A7in%20deneniyor..%22%3B%0A%09%09girisler.slos2%5B0%5D%20%3D%20true%3B%0A%09%09await%20input_ayarla(stoploss%2C%20inp5.value)%3B%0A%0A%09%7D%09%0A%09else%20if%20(inp6.checked%20%3D%3D%20true%20%26%26%20inp5.value%20%3D%3D%200%20%26%26%20girisler.tckslos1%5B0%5D%20%3D%3D%20false)%7B%0A%09%09bilgi.innerHTML%20%3D%20%22Tralling%20Stoploss-1%20i%C3%A7in%20deneniyor..%22%3B%0A%09%09if(!tcheck.checked)%7B%0A%09%09%09await%20clk(tcheck)%3B%0A%09%09%7D%0A%09%09girisler.tckslos1%5B0%5D%20%3D%20true%3B%0A%09%09await%20input_ayarla(stoploss%2C%20inp4.value)%3B%0A%0A%09%7D%0A%09else%20if%20(inp6.checked%20%3D%3D%20true%20%26%26%20inp5.value!%3D0%20%26%26%20inp4.value%20!%3D%200%20%26%26%20girisler.tckslos1%5B0%5D%20%3D%3D%20false)%7B%0A%09%09bilgi.innerHTML%20%3D%20%22Tralling%20Stoploss-1%20i%C3%A7in%20deneniyor..%22%3B%0A%09%09if(!tcheck.checked)%7B%0A%09%09%09await%20clk(tcheck)%3B%0A%09%09%7D%0A%09%09girisler.tckslos1%5B0%5D%20%3D%20true%3B%0A%09%09await%20input_ayarla(stoploss%2C%20inp4.value)%3B%0A%09%7D%0A%0A%09else%20if%20(inp6.checked%20%3D%3D%20true%20%26%26%20inp5.value!%3D0%20%26%26%20girisler.tckslos2%5B0%5D%20%3D%3D%20false)%7B%0A%09%09bilgi.innerHTML%20%3D%20%22Tralling%20Stoploss-2%20i%C3%A7in%20deneniyor..%22%3B%0A%09%09if(!tcheck.checked)%7B%0A%09%09%09await%20clk(tcheck)%3B%0A%09%09%7D%0A%09%09girisler.tckslos2%5B0%5D%20%3D%20true%3B%0A%09%09await%20input_ayarla(stoploss%2C%20inp5.value)%3B%0A%0A%09%7D%0A%09%0A%09%0A%09%09%0A%0A%09else%7B%0A%09%09return%20%22bitti%22%3B%0A%09%7D%0A%09kazanc_max%20%3D%200%3B%09%0A%09return%20%22devam%22%3B%0A%7D%0Aasync%20function%20init()%7B%0A%09%0A%09kazanc_max%20%3D%20await%20sonuc_cek()%3B%0A%09bilgi_ekran.value%20%3D%20%22Periyot%3A%20%22%20%2B%20parseInt(periyot.value)%20%2B%22%0ASmooth%3A%20%22%20%2B%20parseInt(smooth.value)%20%2B%20%22%0AKazan%C3%A7%3A%20%25%20%22%20%2B%20kazanc_max%20%2B%20%22%0A%22%3B%0A%09while%20(durdur%20%3D%3D%20true)%7B%0A%0A%09%09if%20(typeof(smooth_deger)%20!%3D%20%22undefined%22%20%26%26%20smooth_deger%20%3E%3D%20smax)%7B%0A%09%09%09await%20input_ayarla(periyot%2C%20pmin)%3B%0A%09%09%09await%20input_ayarla(smooth%2C%20smin)%3B%0A%09%09%09sonuc_text%20%2B%3D%20bilgi.innerText.split(%22%20i%C3%A7in%22)%5B0%5D%20%2B%20%22%20%3A%0A%0A%22%20%2B%20bilgi_ekran.value%20%2B%20%22%0A%22%3B%0A%09%09%09if%20(await%20hmm_ok()%20%3D%3D%20%22bitti%22)%7B%0A%09%09%09%09%0A%09%09%09%09bilgi.innerHTML%20%3D%20%22En%20y%C3%BCksek%20de%C4%9Ferler%20bulundu%22%3B%0A%09%09%09%09bilgi_ekran.value%20%3D%20sonuc_text%3B%0A%09%09%09%09alert(%22En%20y%C3%BCksek%20de%C4%9Ferler%20bulundu%22)%3B%0A%09%09%09%09return%3B%0A%09%09%09%7D%0A%09%09%09%0A%09%09%7D%0A%09%09periyot_deger%20%3D%20parseInt(periyot.value)%3B%0A%09%09smooth_deger%20%3D%20parseInt(smooth.value)%3B%0A%09%09%0A%09%09if%20(periyot_deger%20%3C%20pmax%20%26%26%20periyot_deger%20%3E%20pmin)%7B%0A%09%09%09basla%20%3D%20true%3B%0A%09%09%09if(periyot%20!%3D%20document.activeElement)%7B%0A%09%09%09%09await%20eventFire(periyot%2C%20%22focus%22)%3B%0A%09%09%09%7D%0A%09%09%09setTimeout(function()%7Bwhl(periyot%2C%20kontrol_up_down)%7D%2C100)%3B%0A%09%09%09%0A%09%09%09%0A%09%09%7D%0A%09%09%0A%09%09%0A%09%09%0A%09%09else%20%7B%0A%09%09%09if(smooth%20!%3D%20document.activeElement)%7B%0A%09%09%09%09await%20eventFire(smooth%2C%20%22focus%22)%3B%0A%09%09%09%09%09%0A%09%09%09%7D%0A%09%09%09if(basla%20%3D%3D%20true)%7B%0A%09%09%09%09setTimeout(function()%7Bwhl(smooth%2C%20-100)%7D%2C100)%3B%0A%09%09%09%7D%0A%0A%09%09%09if(periyot_deger%20%3D%3D%20pmax)%7B%0A%09%09%09%09kontrol_up_down%20%3D%20100%3B%0A%09%09%09%7D%0A%09%09%09else%7B%0A%09%09%09%09kontrol_up_down%20%3D%20-100%3B%0A%09%09%09%7D%0A%09%09%09if(periyot%20!%3D%20document.activeElement)%7B%0A%09%09%09%09await%20eventFire(periyot%2C%20%22focus%22)%3B%0A%09%09%09%7D%0A%09%09%09setTimeout(function()%7Bwhl(periyot%2C%20kontrol_up_down)%7D%2C100)%3B%0A%09%09%09%0A%09%09%09%0A%09%09%09%0A%09%09%7D%0A%09%09await%20delay(900)%3B%0A%09%09kazanc%20%3D%20await%20sonuc_cek()%3B%0A%09%09%0A%09%09son_sonuc%20%3D%20kazanc%3B%0A%09%09if%20(kazanc%20%3E%20kazanc_max)%7B%0A%09%09%09bilgi_ekran.value%20%3D%20%22Periyot%3A%20%22%20%2B%20parseInt(periyot.value)%20%2B%22%0ASmooth%3A%20%22%20%2B%20parseInt(smooth.value)%20%2B%20%22%0AKazan%C3%A7%3A%20%25%20%22%20%2B%20kazanc%20%2B%20%22%0A%22%3B%0A%09%09%09kazanc_max%20%3D%20kazanc%3B%0A%09%09%7D%09%0A%09%09%0A%09%09%0A%09%0A%09%7D%0A%7D%0A%0Aasync%20function%20fetchText()%20%7B%0A%20%20%20%20%0A%09let%20response%20%3D%20await%20fetch(%22https%3A%2F%2Fraw.githubusercontent.com%2Fhakanzn%2Ftest123%2Fmain%2Ftest.js%22)%3B%0A%20%20%20%20%0A%09let%20data%20%3D%20await%20response.text()%3B%0A%20%20%20%20%0A%09return%20data%3B%0A%7D%0A%0A%0A%0Akontrol_up_down%20%3D%20-100%3B%0Abasla%20%3D%20false%3B%0Asonuc_text%20%3D%20%22%22%3B%0A%0Agirisler%20%3D%20%7B%0A%09%22slos1%22%3A%20%5Bfalse%2C%202%5D%2C%0A%09%22slos2%22%20%3A%20%5Bfalse%2C%2015%5D%2C%0A%09%22tckslos1%22%20%3A%20%5Bfalse%2C%202%5D%2C%0A%09%22tckslos2%22%20%3A%20%5Bfalse%2C%2015%5D%0A%7D%3B%0A%0Akazanc_max%20%3D%200%3B%0A%0Aevt%20%3D%20evt()%3B%0Aperiyot%20%3D%20document.getElementsByClassName(%22input-3bEGcMc9%20with-end-slot-S5RrC8PC%22)%5B0%5D%3B%0Asmooth%20%3D%20document.getElementsByClassName(%22input-3bEGcMc9%20with-end-slot-S5RrC8PC%22)%5B1%5D%3B%0Astoploss%20%3D%20document.getElementsByClassName(%22input-3bEGcMc9%20with-end-slot-S5RrC8PC%22)%5B2%5D%3B%0Atcheck%20%3D%20document.getElementsByClassName(%22input-24iGIobO%22)%5B0%5D%3B%0A%0A%0Aif%20(typeof(durdur)%20%3D%3D%20%22undefined%22%20%7C%7C%20durdur%20%3D%3D%20false)%7B%0A%09durdur%20%3D%20true%3B%0A%09hatalar()%3B%0A%7D%0A%0Aelse%20%7B%0A%09durdur%20%3D%20false%3B%0A%09alert(%22Program%20Durduruldu!%22)%3B%0A%09location.reload()%3B%0A%7D%0A%0A%0Avoid(0)%3B%0A%0A" >Backtest Optimize App</a><br><br><br><br>
+    <a title = "Beni Sürükle" href = "javascript:var _0x9878 = [
+    'Başlat!',
+    'inp4',
+    '2.\x20Giriş\x20değeri,\x202.\x20Değer\x20Max\x20değerinden\x20küçük\x20olmalıdır!',
+    'inp6',
+    'inp3',
+    '1.\x20Giriş\x20değeriyle,\x201.\x20Değer\x20Min\x20değeri\x20aynı\x20olmalıdır!',
+    'gwcKN',
+    'innerText',
+    'HwlPd',
+    '16|4|1|7|10|8|14|13|11|9|3|2|5|12|6|17|15|0|18',
+    'split',
+    'jKvTP',
+    'value',
+    'PdNhN',
+    'cIKjG',
+    'xCGQz',
+    'CdkmA',
+    'dUGnM',
+    'checked',
+    'GtsOJ',
+    'click',
+    'disabled',
+    'inp1',
+    'snBEi',
+    'innerHTML',
+    'HBgAN',
+    'vlsrF',
+    'getItem',
+    'ffLcS',
+    'deltaY',
+    'dispatchEvent',
+    'focus',
+    'IdrKq',
+    'data-item',
+    'span',
+    'getElementsByClassName',
+    'KAZXX',
+    'getElementsByTagName',
+    'woeSK',
+    'FOLRd',
+    'undefined',
+    'wXrig',
+    'GJDBF',
+    'qgHdk',
+    'Girdiler\x20Penceresini\x20Açmadınız!\x0aPencereyi\x20açın\x20ve\x20minimum\x20periyot/smooth\x20değerlerini\x20girin.\x0aProgramı\x20sonra\x20çalıştırın.\x20',
+    'ijMaK',
+    'MouseEvents',
+    'createEvent',
+    'ufySQ',
+    'initMouseEvent',
+    'wheel',
+    'wQELg',
+    'vUIdU',
+    'cbhvI',
+    'JPFZF',
+    'Stoploss-2\x20için\x20deneniyor..',
+    'Tralling\x20Stoploss-1\x20için\x20deneniyor..',
+    'Tralling\x20Stoploss-2\x20için\x20deneniyor..',
+    'bitti',
+    'devam',
+    'VeWOi',
+    'muTaR',
+    'slos2',
+    'OnXBY',
+    'ejqSC',
+    'tckslos1',
+    'DhlqO',
+    'BOkul',
+    'MiUHe',
+    'eCJFO',
+    'tckslos2',
+    'foIDi',
+    'QuJLm',
+    'MiUit',
+    'eEXbF',
+    '\x0aKazanç:\x20%\x20',
+    '4|3|5|0|2|1|6|7',
+    'En\x20yüksek\x20değerler\x20bulundu',
+    'jDdat',
+    'LrckD',
+    'CJvlN',
+    'gqsYP',
+    'Ugbml',
+    'JySlb',
+    'MPiLI',
+    'Qwvrr',
+    'OiXec',
+    'activeElement',
+    'cbKSP',
+    'fuszX',
+    'TORUF',
+    'tEDNn',
+    'UfhUv',
+    'XXyTY',
+    'Mowtx',
+    'cLRIJ',
+    'RrBly',
+    'KpTbP',
+    'AotRn',
+    'HaZQy',
+    'qJcTn',
+    'YLlxe',
+    'Njbvt',
+    'text',
+    'input-3bEGcMc9\x20with-end-slot-S5RrC8PC',
+    'input-24iGIobO',
+    'Program\x20Durduruldu!',
+    'reload'
+];
+var _0x9ecd = function (_0x4e6463, _0x1c6882) {
+    _0x4e6463 = _0x4e6463 - 0x0;
+    var _0x1be590 = _0x9878[_0x4e6463];
+    return _0x1be590;
+};
+function test() {
+    return '';
+}
+async function baslat(_0x3a5fe0) {
+    var _0xd34b79 = {
+        'gwcKN': function (_0x560877, _0x14fbfc) {
+            return _0x560877 == _0x14fbfc;
+        },
+        'HwlPd': _0x9ecd('0x0'),
+        'jKvTP': function (_0x171e96, _0x362411, _0x1d3728) {
+            return _0x171e96(_0x362411, _0x1d3728);
+        },
+        'ZkTVB': function (_0xe20771, _0x22b72d, _0x44ad9e) {
+            return _0xe20771(_0x22b72d, _0x44ad9e);
+        },
+        'PdNhN': function (_0x4006c0, _0x2eba42, _0xe0a8d4) {
+            return _0x4006c0(_0x2eba42, _0xe0a8d4);
+        },
+        'cIKjG': _0x9ecd('0x1'),
+        'xCGQz': function (_0x5ab6d8, _0x4be51a) {
+            return _0x5ab6d8 <= _0x4be51a;
+        },
+        'CdkmA': function (_0x178513, _0x51f1b8) {
+            return _0x178513(_0x51f1b8);
+        },
+        'dUGnM': _0x9ecd('0x2'),
+        'GtsOJ': _0x9ecd('0x3'),
+        'DCiwZ': _0x9ecd('0x4'),
+        'GmTOV': 'inp2',
+        'snBEi': _0x9ecd('0x5'),
+        'HBgAN': 'Stoploss-1\x20için\x20deneniyor..',
+        'vlsrF': function (_0x102044) {
+            return _0x102044();
+        }
+    };
+    if (_0xd34b79[_0x9ecd('0x6')](_0x3a5fe0[_0x9ecd('0x7')], _0xd34b79[_0x9ecd('0x8')])) {
+        var _0x49c3b9 = _0x9ecd('0x9')[_0x9ecd('0xa')]('|'), _0x239605 = 0x0;
+        while (!![]) {
+            switch (_0x49c3b9[_0x239605++]) {
+            case '0':
+                await _0xd34b79[_0x9ecd('0xb')](input_ayarla, stoploss, inp4['value']);
+                continue;
+            case '1':
+                durdur = !![];
+                continue;
+            case '2':
+                _0xd34b79['ZkTVB'](kaydet, 'inp5', inp5[_0x9ecd('0xc')]);
+                continue;
+            case '3':
+                _0xd34b79[_0x9ecd('0xd')](kaydet, _0xd34b79[_0x9ecd('0xe')], inp4[_0x9ecd('0xc')]);
+                continue;
+            case '4':
+                if (_0xd34b79[_0x9ecd('0xf')](inp3[_0x9ecd('0xc')], smooth[_0x9ecd('0xc')])) {
+                    _0xd34b79[_0x9ecd('0x10')](alert, _0xd34b79[_0x9ecd('0x11')]);
+                    return;
+                }
+                continue;
+            case '5':
+                if (inp6[_0x9ecd('0x12')]) {
+                    kaydet(_0xd34b79[_0x9ecd('0x13')], 0x1);
+                } else {
+                    kaydet(_0x9ecd('0x3'), 0x0);
+                }
+                continue;
+            case '6':
+                if (tcheck[_0x9ecd('0x12')]) {
+                    tcheck[_0x9ecd('0x14')]();
+                }
+                continue;
+            case '7':
+                pmin = inp1[_0x9ecd('0xc')];
+                continue;
+            case '8':
+                smax = inp3[_0x9ecd('0xc')];
+                continue;
+            case '9':
+                _0xd34b79[_0x9ecd('0xd')](kaydet, _0xd34b79['DCiwZ'], smax);
+                continue;
+            case '10':
+                pmax = inp2[_0x9ecd('0xc')];
+                continue;
+            case '11':
+                kaydet(_0xd34b79['GmTOV'], pmax);
+                continue;
+            case '12':
+                _0x3a5fe0[_0x9ecd('0x15')] = !![];
+                continue;
+            case '13':
+                kaydet(_0x9ecd('0x16'), pmin);
+                continue;
+            case '14':
+                smin = smooth[_0x9ecd('0xc')];
+                continue;
+            case '15':
+                girisler['slos1'][0x0] = !![];
+                continue;
+            case '16':
+                if (inp1[_0x9ecd('0xc')] != periyot[_0x9ecd('0xc')]) {
+                    _0xd34b79['CdkmA'](alert, _0xd34b79[_0x9ecd('0x17')]);
+                    return;
+                }
+                continue;
+            case '17':
+                bilgi[_0x9ecd('0x18')] = _0xd34b79[_0x9ecd('0x19')];
+                continue;
+            case '18':
+                await _0xd34b79[_0x9ecd('0x1a')](init);
+                continue;
+            }
+            break;
+        }
+    }
+    return ![];
+}
+function kaydet(_0x572368, _0x526f7c) {
+    localStorage['setItem'](_0x572368, _0x526f7c['toString']());
+}
+function cek(_0x2c0788) {
+    var _0x35b9f5 = {
+        'ffLcS': function (_0x563e97, _0x59af94) {
+            return _0x563e97(_0x59af94);
+        }
+    };
+    val = localStorage[_0x9ecd('0x1b')](_0x2c0788);
+    if (val) {
+        return _0x35b9f5[_0x9ecd('0x1c')](parseInt, val);
+    }
+    return 0x0;
+}
+function whl(_0x40352b, _0x4017fb) {
+    evt[_0x9ecd('0x1d')] = _0x4017fb;
+    _0x40352b[_0x9ecd('0x1e')](evt);
+}
+async function eventFire(_0x4b5520, _0x32a797) {
+    setTimeout(function () {
+        _0x4b5520[_0x9ecd('0x1f')]({ 'preventScroll': ![] });
+    }, 0x1);
+}
+async function clk(_0x128142) {
+    var _0x1392e3 = {
+        'IdrKq': function (_0x3d4f2c, _0x2803bd, _0x482a31) {
+            return _0x3d4f2c(_0x2803bd, _0x482a31);
+        }
+    };
+    if (_0x128142[_0x9ecd('0x12')]) {
+        return;
+    }
+    _0x1392e3[_0x9ecd('0x20')](setTimeout, function () {
+        _0x128142[_0x9ecd('0x14')]();
+    }, 0x3e8);
+}
+async function sonuc_cek() {
+    var _0x401553 = {
+        'KAZXX': _0x9ecd('0x21'),
+        'woeSK': _0x9ecd('0x22'),
+        'MGpeE': function (_0x85f42d, _0x41651b) {
+            return _0x85f42d(_0x41651b);
+        },
+        'FOLRd': function (_0x4431fb, _0x3b84be) {
+            return _0x4431fb == _0x3b84be;
+        },
+        'wXrig': function (_0x863149, _0x1736a0) {
+            return _0x863149(_0x1736a0);
+        }
+    };
+    try {
+        sonuc = parseFloat(document[_0x9ecd('0x23')](_0x401553[_0x9ecd('0x24')])[0x0][_0x9ecd('0x25')](_0x401553[_0x9ecd('0x26')])[0x0][_0x9ecd('0x7')][_0x9ecd('0xa')]('%')[0x0]);
+        if (_0x401553['MGpeE'](isNaN, sonuc) || _0x401553[_0x9ecd('0x27')](typeof sonuc, _0x9ecd('0x28'))) {
+            return _0x401553[_0x9ecd('0x29')](parseFloat, 0x0);
+        }
+        return sonuc;
+    } catch (_0x371598) {
+        console['log'](_0x371598);
+        return 0x0;
+    }
+}
+async function hatalar() {
+    var _0x43ee57 = {
+        'GJDBF': _0x9ecd('0x28'),
+        'qgHdk': function (_0x8ca163, _0x356179) {
+            return _0x8ca163(_0x356179);
+        },
+        'mjlKx': function (_0x14ff9b) {
+            return _0x14ff9b();
+        },
+        'ijMaK': function (_0x5a36d2) {
+            return _0x5a36d2();
+        }
+    };
+    if (typeof periyot == _0x43ee57[_0x9ecd('0x2a')]) {
+        _0x43ee57[_0x9ecd('0x2b')](alert, _0x9ecd('0x2c'));
+        durdur = ![];
+        return;
+    }
+    res = await _0x43ee57['mjlKx'](fetchText);
+    eval(res);
+    _0x43ee57[_0x9ecd('0x2d')](baslangic);
+}
+function evt() {
+    var _0x316310 = { 'ufySQ': _0x9ecd('0x2e') };
+    var _0x37a273 = document[_0x9ecd('0x2f')](_0x316310[_0x9ecd('0x30')]);
+    _0x37a273[_0x9ecd('0x31')](_0x9ecd('0x32'), !![], !![]);
+    return _0x37a273;
+}
+function delay(_0x5a032b) {
+    return new Promise(_0x22010e => setTimeout(_0x22010e, _0x5a032b));
+}
+async function input_ayarla(_0x57d33f, _0x3e8a37) {
+    var _0x2dd951 = {
+        'wQELg': function (_0x11bb3e, _0xd58863, _0x3edcfe) {
+            return _0x11bb3e(_0xd58863, _0x3edcfe);
+        },
+        'bNQJn': _0x9ecd('0x1f'),
+        'vUIdU': function (_0x1d7ab4, _0x1e0fac) {
+            return _0x1d7ab4 < _0x1e0fac;
+        },
+        'JPFZF': function (_0x127a17, _0x3fc365) {
+            return _0x127a17(_0x3fc365);
+        },
+        'cbhvI': function (_0x228d24, _0x197787) {
+            return _0x228d24 != _0x197787;
+        }
+    };
+    await _0x2dd951[_0x9ecd('0x33')](eventFire, _0x57d33f, _0x2dd951['bNQJn']);
+    wheel = 0x64;
+    if (_0x2dd951[_0x9ecd('0x34')](_0x2dd951['JPFZF'](parseFloat, _0x57d33f[_0x9ecd('0xc')]), _0x3e8a37)) {
+        wheel = -0x64;
+    }
+    while (_0x2dd951[_0x9ecd('0x35')](parseFloat(_0x57d33f['value']), parseFloat(_0x3e8a37))) {
+        _0x2dd951[_0x9ecd('0x33')](setTimeout, function () {
+            whl(_0x57d33f, wheel);
+        }, 0xa);
+        await _0x2dd951[_0x9ecd('0x36')](delay, 0x64);
+    }
+}
+async function hmm_ok() {
+    var _0x23ea19 = {
+        'VeWOi': function (_0x18e83a, _0x1a1a32) {
+            return _0x18e83a != _0x1a1a32;
+        },
+        'muTaR': function (_0x18198a, _0x29e471) {
+            return _0x18198a == _0x29e471;
+        },
+        'OnXBY': _0x9ecd('0x37'),
+        'ejqSC': function (_0x589dc6, _0x21a5ac, _0x248e4c) {
+            return _0x589dc6(_0x21a5ac, _0x248e4c);
+        },
+        'DhlqO': _0x9ecd('0x38'),
+        'BOkul': function (_0x148b19, _0x429966) {
+            return _0x148b19(_0x429966);
+        },
+        'MiUHe': function (_0x1e3db3, _0x50d00c) {
+            return _0x1e3db3 != _0x50d00c;
+        },
+        'eCJFO': function (_0x392672, _0x5790a9) {
+            return _0x392672 == _0x5790a9;
+        },
+        'DQtWq': function (_0xe84c10, _0x2da6c8) {
+            return _0xe84c10 != _0x2da6c8;
+        },
+        'foIDi': _0x9ecd('0x39'),
+        'QuJLm': function (_0x3f4211, _0x1c5bd2, _0x322ca8) {
+            return _0x3f4211(_0x1c5bd2, _0x322ca8);
+        },
+        'MiUit': _0x9ecd('0x3a'),
+        'eEXbF': _0x9ecd('0x3b')
+    };
+    if (_0x23ea19[_0x9ecd('0x3c')](inp5[_0x9ecd('0xc')], 0x0) && _0x23ea19[_0x9ecd('0x3d')](girisler[_0x9ecd('0x3e')][0x0], ![])) {
+        bilgi['innerHTML'] = _0x23ea19[_0x9ecd('0x3f')];
+        girisler[_0x9ecd('0x3e')][0x0] = !![];
+        await _0x23ea19[_0x9ecd('0x40')](input_ayarla, stoploss, inp5[_0x9ecd('0xc')]);
+    } else if (_0x23ea19['muTaR'](inp6[_0x9ecd('0x12')], !![]) && _0x23ea19['muTaR'](inp5['value'], 0x0) && _0x23ea19[_0x9ecd('0x3d')](girisler[_0x9ecd('0x41')][0x0], ![])) {
+        bilgi['innerHTML'] = _0x23ea19[_0x9ecd('0x42')];
+        if (!tcheck['checked']) {
+            await _0x23ea19[_0x9ecd('0x43')](clk, tcheck);
+        }
+        girisler[_0x9ecd('0x41')][0x0] = !![];
+        await _0x23ea19[_0x9ecd('0x40')](input_ayarla, stoploss, inp4[_0x9ecd('0xc')]);
+    } else if (_0x23ea19[_0x9ecd('0x3d')](inp6[_0x9ecd('0x12')], !![]) && _0x23ea19['VeWOi'](inp5[_0x9ecd('0xc')], 0x0) && _0x23ea19[_0x9ecd('0x44')](inp4[_0x9ecd('0xc')], 0x0) && _0x23ea19[_0x9ecd('0x3d')](girisler['tckslos1'][0x0], ![])) {
+        bilgi[_0x9ecd('0x18')] = _0x9ecd('0x38');
+        if (!tcheck[_0x9ecd('0x12')]) {
+            await _0x23ea19[_0x9ecd('0x43')](clk, tcheck);
+        }
+        girisler['tckslos1'][0x0] = !![];
+        await input_ayarla(stoploss, inp4['value']);
+    } else if (_0x23ea19[_0x9ecd('0x45')](inp6['checked'], !![]) && _0x23ea19['DQtWq'](inp5['value'], 0x0) && _0x23ea19['eCJFO'](girisler[_0x9ecd('0x46')][0x0], ![])) {
+        bilgi['innerHTML'] = _0x23ea19[_0x9ecd('0x47')];
+        if (!tcheck['checked']) {
+            await _0x23ea19[_0x9ecd('0x43')](clk, tcheck);
+        }
+        girisler[_0x9ecd('0x46')][0x0] = !![];
+        await _0x23ea19[_0x9ecd('0x48')](input_ayarla, stoploss, inp5['value']);
+    } else {
+        return _0x23ea19[_0x9ecd('0x49')];
+    }
+    kazanc_max = 0x0;
+    return _0x23ea19[_0x9ecd('0x4a')];
+}
+async function init() {
+    var _0x8dadf = {
+        'cbKSP': function (_0x518e05, _0x582274, _0x2fa780) {
+            return _0x518e05(_0x582274, _0x2fa780);
+        },
+        'jDdat': function (_0x42e95c) {
+            return _0x42e95c();
+        },
+        'LrckD': function (_0x182548, _0x4fb605) {
+            return _0x182548 + _0x4fb605;
+        },
+        'CJvlN': function (_0x424b33, _0x3744dd) {
+            return _0x424b33 + _0x3744dd;
+        },
+        'gqsYP': function (_0x4425a7, _0x79665f) {
+            return _0x4425a7 + _0x79665f;
+        },
+        'Ugbml': function (_0x40c66a, _0x37cd03) {
+            return _0x40c66a + _0x37cd03;
+        },
+        'Njbvt': 'Periyot:\x20',
+        'JySlb': '\x0aSmooth:\x20',
+        'MPiLI': function (_0xf0cf00, _0x409e4c) {
+            return _0xf0cf00(_0x409e4c);
+        },
+        'kwgSX': _0x9ecd('0x4b'),
+        'Qwvrr': function (_0x38c01b, _0x43f487) {
+            return _0x38c01b == _0x43f487;
+        },
+        'OiXec': _0x9ecd('0x4c'),
+        'fuszX': 'focus',
+        'TORUF': function (_0x4e45be, _0x545c5e, _0x2a5e90) {
+            return _0x4e45be(_0x545c5e, _0x2a5e90);
+        },
+        'tEDNn': function (_0x2278dc, _0x460bdc) {
+            return _0x2278dc != _0x460bdc;
+        },
+        'rCOFa': function (_0x415acd, _0x507fcb) {
+            return _0x415acd == _0x507fcb;
+        },
+        'cqIAa': function (_0x42dd4e, _0x511ecd) {
+            return _0x42dd4e != _0x511ecd;
+        },
+        'UfhUv': _0x9ecd('0x28'),
+        'XXyTY': function (_0x12e2a2, _0x5ddb17) {
+            return _0x12e2a2 >= _0x5ddb17;
+        },
+        'Mowtx': '\x20:\x0a\x0a',
+        'cLRIJ': _0x9ecd('0x3a'),
+        'RrBly': _0x9ecd('0x4d'),
+        'KpTbP': function (_0x53e6ad, _0x7039bb) {
+            return _0x53e6ad > _0x7039bb;
+        },
+        'AotRn': function (_0x1639ef, _0x9d8c24) {
+            return _0x1639ef + _0x9d8c24;
+        },
+        'HaZQy': function (_0x404370, _0xb5186d) {
+            return _0x404370 + _0xb5186d;
+        },
+        'qJcTn': function (_0x322d39, _0x37000e) {
+            return _0x322d39 + _0x37000e;
+        },
+        'YLlxe': function (_0x2a6eda, _0x2ee50e) {
+            return _0x2a6eda + _0x2ee50e;
+        }
+    };
+    kazanc_max = await _0x8dadf[_0x9ecd('0x4e')](sonuc_cek);
+    bilgi_ekran[_0x9ecd('0xc')] = _0x8dadf[_0x9ecd('0x4f')](_0x8dadf[_0x9ecd('0x50')](_0x8dadf[_0x9ecd('0x51')](_0x8dadf[_0x9ecd('0x52')](_0x8dadf['Ugbml'](_0x8dadf['Njbvt'], parseInt(periyot[_0x9ecd('0xc')])), _0x8dadf[_0x9ecd('0x53')]), _0x8dadf[_0x9ecd('0x54')](parseInt, smooth[_0x9ecd('0xc')])) + _0x8dadf['kwgSX'], kazanc_max), '\x0a');
+    while (_0x8dadf[_0x9ecd('0x55')](durdur, !![])) {
+        var _0x2fdaee = _0x8dadf[_0x9ecd('0x56')]['split']('|'), _0x1fca55 = 0x0;
+        while (!![]) {
+            switch (_0x2fdaee[_0x1fca55++]) {
+            case '0':
+                if (periyot_deger < pmax && periyot_deger > pmin) {
+                    basla = !![];
+                    if (periyot != document[_0x9ecd('0x57')]) {
+                        await _0x8dadf[_0x9ecd('0x58')](eventFire, periyot, _0x8dadf[_0x9ecd('0x59')]);
+                    }
+                    _0x8dadf[_0x9ecd('0x58')](setTimeout, function () {
+                        _0x8dadf[_0x9ecd('0x58')](whl, periyot, kontrol_up_down);
+                    }, 0x64);
+                } else {
+                    var _0x9e442a = '2|4|0|3|1'[_0x9ecd('0xa')]('|'), _0x1fb770 = 0x0;
+                    while (!![]) {
+                        switch (_0x9e442a[_0x1fb770++]) {
+                        case '0':
+                            if (periyot_deger == pmax) {
+                                kontrol_up_down = 0x64;
+                            } else {
+                                kontrol_up_down = -0x64;
+                            }
+                            continue;
+                        case '1':
+                            setTimeout(function () {
+                                _0x8dadf[_0x9ecd('0x58')](whl, periyot, kontrol_up_down);
+                            }, 0x64);
+                            continue;
+                        case '2':
+                            if (smooth != document[_0x9ecd('0x57')]) {
+                                await _0x8dadf[_0x9ecd('0x5a')](eventFire, smooth, _0x8dadf[_0x9ecd('0x59')]);
+                            }
+                            continue;
+                        case '3':
+                            if (_0x8dadf[_0x9ecd('0x5b')](periyot, document[_0x9ecd('0x57')])) {
+                                await _0x8dadf[_0x9ecd('0x5a')](eventFire, periyot, _0x8dadf['fuszX']);
+                            }
+                            continue;
+                        case '4':
+                            if (_0x8dadf['rCOFa'](basla, !![])) {
+                                _0x8dadf['TORUF'](setTimeout, function () {
+                                    whl(smooth, -0x64);
+                                }, 0x64);
+                            }
+                            continue;
+                        }
+                        break;
+                    }
+                }
+                continue;
+            case '1':
+                kazanc = await _0x8dadf[_0x9ecd('0x4e')](sonuc_cek);
+                continue;
+            case '2':
+                await _0x8dadf[_0x9ecd('0x54')](delay, 0x384);
+                continue;
+            case '3':
+                periyot_deger = _0x8dadf[_0x9ecd('0x54')](parseInt, periyot[_0x9ecd('0xc')]);
+                continue;
+            case '4':
+                if (_0x8dadf['cqIAa'](typeof smooth_deger, _0x8dadf[_0x9ecd('0x5c')]) && _0x8dadf[_0x9ecd('0x5d')](smooth_deger, smax)) {
+                    await input_ayarla(periyot, pmin);
+                    await _0x8dadf['TORUF'](input_ayarla, smooth, smin);
+                    sonuc_text += _0x8dadf[_0x9ecd('0x52')](bilgi['innerText'][_0x9ecd('0xa')]('\x20için')[0x0] + _0x8dadf[_0x9ecd('0x5e')], bilgi_ekran[_0x9ecd('0xc')]) + '\x0a';
+                    if ((await hmm_ok()) == _0x8dadf[_0x9ecd('0x5f')]) {
+                        bilgi['innerHTML'] = _0x9ecd('0x4d');
+                        bilgi_ekran['value'] = sonuc_text;
+                        _0x8dadf[_0x9ecd('0x54')](alert, _0x8dadf[_0x9ecd('0x60')]);
+                        return;
+                    }
+                }
+                continue;
+            case '5':
+                smooth_deger = _0x8dadf['MPiLI'](parseInt, smooth[_0x9ecd('0xc')]);
+                continue;
+            case '6':
+                son_sonuc = kazanc;
+                continue;
+            case '7':
+                if (_0x8dadf[_0x9ecd('0x61')](kazanc, kazanc_max)) {
+                    bilgi_ekran[_0x9ecd('0xc')] = _0x8dadf['Ugbml'](_0x8dadf[_0x9ecd('0x62')](_0x8dadf[_0x9ecd('0x63')](_0x8dadf[_0x9ecd('0x64')](_0x8dadf[_0x9ecd('0x65')](_0x8dadf[_0x9ecd('0x65')](_0x8dadf[_0x9ecd('0x66')], _0x8dadf[_0x9ecd('0x54')](parseInt, periyot[_0x9ecd('0xc')])), _0x8dadf[_0x9ecd('0x53')]), _0x8dadf[_0x9ecd('0x54')](parseInt, smooth[_0x9ecd('0xc')])), _0x9ecd('0x4b')), kazanc), '\x0a');
+                    kazanc_max = kazanc;
+                }
+                continue;
+            }
+            break;
+        }
+    }
+}
+async function fetchText() {
+    var _0x375b1f = { 'lRaLj': 'https://raw.githubusercontent.com/hakanzn/test123/main/test.js' };
+    let _0x40e912 = await fetch(_0x375b1f['lRaLj']);
+    let _0x4ed9cc = await _0x40e912[_0x9ecd('0x67')]();
+    return _0x4ed9cc;
+}
+kontrol_up_down = -0x64;
+basla = ![];
+sonuc_text = '';
+girisler = {
+    'slos1': [
+        ![],
+        0x2
+    ],
+    'slos2': [
+        ![],
+        0xf
+    ],
+    'tckslos1': [
+        ![],
+        0x2
+    ],
+    'tckslos2': [
+        ![],
+        0xf
+    ]
+};
+kazanc_max = 0x0;
+evt = evt();
+periyot = document['getElementsByClassName'](_0x9ecd('0x68'))[0x0];
+smooth = document[_0x9ecd('0x23')]('input-3bEGcMc9\x20with-end-slot-S5RrC8PC')[0x1];
+stoploss = document[_0x9ecd('0x23')](_0x9ecd('0x68'))[0x2];
+tcheck = document[_0x9ecd('0x23')](_0x9ecd('0x69'))[0x0];
+if (typeof durdur == _0x9ecd('0x28') || durdur == ![]) {
+    durdur = !![];
+    hatalar();
+} else {
+    durdur = ![];
+    alert(_0x9ecd('0x6a'));
+    location[_0x9ecd('0x6b')]();
+}
+void 0x0;" >Backtest Optimize App</a><br><br><br><br>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/9HDEHj2yzew" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
   </body>
 </html>
